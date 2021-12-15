@@ -13,7 +13,7 @@ const PostUserFlow = async (req, res) => {
 
         const profileImage = await cloudinaryImageUpload(req.files.file, "Kisaragi");
         const user = await UserService.save(name, email, password, profileImage);
-        const token = await generateJWT(user.id);
+        const token = await generateJWT(user);
 
         return res.status(201).json({
             ok: true,

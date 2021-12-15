@@ -8,9 +8,10 @@ const encryptPassword = password => {
     return bcryptjs.hashSync(password, salt);
 }
 
-const generateJWT = ( id ) => {
+const generateJWT = ( user ) => {
     return new Promise((resolve, reject) => {
-        const payload = { id };
+        const { id, name } = user;
+        const payload = { id, name };
         jwt.sign(payload, process.env.SECRET_KEY, {
             expiresIn: process.env.EXPIRATION_DATE
         }, (err, token) => {
