@@ -2,8 +2,9 @@ const UserService = require("../../../services/user.services");
 const { errorResponse } = require("../../../utils/responses");
 
 const GetUserFlow = async (req, res) => {
+    const { followers=false, following=false } = req.query;
     try{
-        const user = await UserService.getUserById(req.params.id);
+        const user = await UserService.getUserById(req.params.id, followers, following);
         return res.status(201).json({
             user
         });

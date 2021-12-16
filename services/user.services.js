@@ -32,8 +32,31 @@ class UserService {
         
     }
 
-    getUserById(id) {
-        return User.findById(id).exec();
+    async getUserById(id, followers, following) {
+        const user = await User.findById(id).exec();
+        if(followers){ 
+            await User.populate(
+                user,
+                {
+                    path: 'followers', 
+                    model: 'User',
+                    select: 'name profileImage'
+                }
+            ); 
+        }
+    
+        if(following){ 
+            await User.populate(
+                user,
+                { 
+                    path: 'following', 
+                    model: 'User' ,
+                    select: 'name profileImage'
+                }
+            ); 
+        }
+
+        return user;
     }
 
     async getUsers(query, from, limit, sort) {
