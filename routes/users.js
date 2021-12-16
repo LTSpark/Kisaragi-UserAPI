@@ -23,6 +23,11 @@ const DeleteUserValidators = require('../apis/users/deleteUser/validators');
 const PutUserFlow = require('../apis/users/putUser/flow');
 const PutUserValidators = require('../apis/users/putUser/validators');
 
+const FollowUserFlow = require('../apis/follow/followUser/flow');
+const FollowUserValidators = require('../apis/follow/followUser/validators');
+
+const UnfollowUserFlow = require('../apis/follow/unfollowUser/flow');
+const UnfollowUserValidators = require('../apis/follow/unfollowUser/validators');
 
 const router = Router();
 
@@ -34,5 +39,8 @@ router.get('/', GetUsersValidators, GetUsersFlow);
 
 router.delete('/', DeleteUserValidators, DeleteUserFlow);
 router.put('/', PutUserValidators, PutUserFlow);
+
+router.put('/follow', FollowUserValidators, FollowUserFlow);
+router.put('/unfollow', UnfollowUserValidators, UnfollowUserFlow);
 
 module.exports = router;
