@@ -27,7 +27,7 @@ class UserService {
 
         return {
             user,
-            token: await generateJWT(user)
+            token: await generateJWT(user.id)
         };
         
     }
